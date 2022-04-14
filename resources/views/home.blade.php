@@ -22,21 +22,23 @@
             <h1 class="pt-3">Phone numbers</h1>
             <div class="filters py-4">
                 <form action="{{ route('phones') }}">
-                    <div class="form-group row">
+                    <div class="form-group row align-items-end">
                         <div class="col-4">
-                            <select class="form-select form-select-lg" name="country">
+                            <label for="phone-country">Choose country</label>
+                            <select class="form-select form-select-lg" name="country" id="phone-country">
                                 <option selected disabled>Select country</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach($countries as $country)
+                                    <option value="{{ $country }}" {{ request('country') === $country? 'selected' : '' }}>{{ $country }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-4">
-                            <select class="form-select form-select-lg" name="country">
+                            <label for="valid-number">Choose Valid</label>
+                            <select class="form-select form-select-lg" name="valid" id="valid-number">
                                 <option selected disabled>Valid phone numbers</option>
                                 <option value="">All</option>
-                                <option value="true">Valid</option>
-                                <option value="false">Not valid</option>
+                                <option value="true" {{ request('valid') === 'true'? 'selected' : '' }}>Valid</option>
+                                <option value="false" {{ request('valid') === 'false'? 'selected' : '' }}>Not valid</option>
                             </select>
                         </div>
                         <div class="col-2">
@@ -58,14 +60,14 @@
                     <tbody class="table table-bordered">
                         @forelse($phones as $phone)
                             <tr>
-                                <td>{{ $phone->phone }}</td>
-                                <td>{{ $phone->phone }}</td>
-                                <td>{{ $phone->phone }}</td>
-                                <td>{{ $phone->phone }}</td>
+                                <td class="py-2">{{ $phone['country'] ?? '' }}</td>
+                                <td class="py-2 text-{{ $phone['state'] === 'OK'? 'success' : 'danger'}}">{{ $phone['state'] ?? '' }}</td>
+                                <td class="py-2">{{ $phone['code'] ?? '' }}</td>
+                                <td class="py-2">{{ $phone['number'] ?? '' }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">No itmes Found!</td>
+                                <td colspan="4" class="text-center py-4">No itmes Found!</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -73,7 +75,7 @@
                 
             </div>
             <div class="row p-3">
-                {{ $phones->withQueryString()->links('pagination::bootstrap-4') }}
+                {{ $paginator->withQueryString()->links('pagination::bootstrap-4') }}
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
