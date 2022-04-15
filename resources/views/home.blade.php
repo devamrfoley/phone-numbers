@@ -36,13 +36,15 @@
                             <label for="valid-number">Choose Valid</label>
                             <select class="form-select form-select-lg" name="valid" id="valid-number">
                                 <option selected disabled>Valid phone numbers</option>
-                                <option value="">All</option>
-                                <option value="true" {{ request('valid') === 'true'? 'selected' : '' }}>Valid</option>
-                                <option value="false" {{ request('valid') === 'false'? 'selected' : '' }}>Not valid</option>
+                                <option value="OK" {{ request('valid') === 'OK'? 'selected' : '' }}>Valid</option>
+                                <option value="NOK" {{ request('valid') === 'NOK'? 'selected' : '' }}>Not valid</option>
                             </select>
                         </div>
-                        <div class="col-2">
+                        <div class="col-2 d-flex">
                             <button type="submit" class="btn btn-lg btn-primary">Filter</button>
+                            @if(request('country') || request('valid'))
+                                <a href="{{ route('phones') }}" class="btn btn-lg btn-warning mx-2">Reset</a>
+                            @endif
                         </div>
                     </div>
                 </form>
@@ -74,9 +76,11 @@
                 </table>
                 
             </div>
+            @if(false)
             <div class="row p-3">
                 {{ $paginator->withQueryString()->links('pagination::bootstrap-4') }}
             </div>
+            @endif
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     </body>

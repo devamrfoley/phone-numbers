@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class PhoneValidationService
 {
@@ -13,24 +13,26 @@ class PhoneValidationService
         $this->countries    = [];
     }
 
-    public function validate(LengthAwarePaginator $paginated_data): array
+    public function validate(Collection $collection)
     {
-        $data = [];
+        $validated_collections = new Collection();
 
-        foreach($paginated_data as $index => $model)
+        foreach($collection as $model)
         {
             [$code, $country, $validated] = $this->match_phone_number($model->phone);
 
-            $data[$index]['code']       = $code;
-            $data[$index]['country']    = $country;
-            $data[$index]['state']      = $validated;
-            $data[$index]['number']     = $this->number($model->phone);
+            $data['code']       = $code;
+            $data['country']    = $country;
+            $data['state']      = $validated;
+            $data['number']     = $this->number($model->phone);
+
+            $validated_collections->push($data);
         }
 
-        return $data;
+        return $validated_collections;
     }
 
-    public function countries()
+    public function countries(): array
     {
         return $this->countries;
     }
