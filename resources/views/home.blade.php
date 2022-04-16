@@ -34,10 +34,10 @@
                         </div>
                         <div class="col-4">
                             <label for="valid-number">Choose Valid</label>
-                            <select class="form-select form-select-lg" name="valid" id="valid-number">
+                            <select class="form-select form-select-lg" name="state" id="valid-number">
                                 <option selected disabled>Valid phone numbers</option>
-                                <option value="OK" {{ request('valid') === 'OK'? 'selected' : '' }}>Valid</option>
-                                <option value="NOK" {{ request('valid') === 'NOK'? 'selected' : '' }}>Not valid</option>
+                                <option value="OK" {{ request('state') === 'OK'? 'selected' : '' }}>Valid</option>
+                                <option value="NOK" {{ request('state') === 'NOK'? 'selected' : '' }}>Not valid</option>
                             </select>
                         </div>
                         <div class="col-2 d-flex">

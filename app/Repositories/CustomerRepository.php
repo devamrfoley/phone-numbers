@@ -31,7 +31,7 @@ class CustomerRepository
     {
         return empty($filters)? $data : $data->filter(function ($phone, $key) use($filters) {
             return (!empty($filters['country'])? $phone['country'] === $filters['country'] : true) && 
-                (!empty($filters['valid'])? $phone['state'] === $filters['valid'] : true);
+                (!empty($filters['state'])? $phone['state'] === $filters['state'] : true);
         });
     }
 }

@@ -8,7 +8,7 @@ class PhoneController extends Controller
 {
     public function index(Request $request, CustomerRepository $customerRepository)
     {
-        $phones     = $customerRepository->filter($customerRepository->normalize(), $request->only(['country', 'valid']));
+        $phones     = $customerRepository->filter($customerRepository->normalize(), $request->only(['country', 'state']));
         $countries  = $customerRepository->countries();
 
         return view('home', ['phones' => $phones, 'countries' => $countries]);
