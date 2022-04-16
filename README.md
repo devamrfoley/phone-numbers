@@ -6,12 +6,12 @@ PHP7.3+, Composer and SQLite 3 installed.
 
 ## Run the project
 
-> git clone git@github.com:devamrfoley/phone-numbers.git
-> cd phone-numbers
-> cp .env.example .env
-> validate the absolute path for DB_DATABASE inside .env file
-> composer install
-> php artisan key:generate
-> php artisan test
-> php artisan serve
-> visit http://127.0.0.1:8000 in your browser
+> git clone git@github.com:devamrfoley/phone-numbers.git <br />
+> cd phone-numbers <br />
+> cp .env.example .env <br />
+> validate the absolute path for DB_DATABASE inside .env file <br />
+> composer install <br />
+> php artisan key:generate <br />
+> php artisan test <br />
+> php artisan serve <br />
+> visit http://127.0.0.1:8000 in your browser <br />
